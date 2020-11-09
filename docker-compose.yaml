@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  proxy:
+    image: "traefik:latest"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./dynamic.yaml:/etc/traefik/dynamic.yaml:ro
+      - ./static.yaml:/etc/traefik/traefik.yaml
+      - ./certs:/certs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+      - "traefik.http.routers.proxy-insecure.entrypoints=web"
+      - "traefik.http.routers.proxy-insecure.middlewares=redirect-to-https"
+
+      - "traefik.http.routers.proxy.entrypoints=web-secure"
+      - "traefik.http.routers.proxy.service=api@internal"
+      - "traefik.http.routers.proxy.tls=true"
+      - "traefik.http.routers.proxy.middlewares=redirect-to-https"
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
