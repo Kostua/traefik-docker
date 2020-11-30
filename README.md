@@ -1,4 +1,4 @@
-# Use traefik as a reverse proxy in development of multiple docker services on MacOS
+# Traefik as a reverse proxy in development of multiple docker services on MacOS
 
 ![](./images/docker.png)
 
