@@ -1,3 +1,10 @@
+# Use traefik as a reverse proxy in development of multiple docker services on MacOS
+
+![](./images/docker.png)
+
+[This is link to the original repository](https://github.com/thebrubaker/traefik-docker) followed by original readme without any changes. 
+
+
 Traefik (pronounced _traffic_) is a modern HTTP reverse proxy and load balancer that integrates directly with your existing docker infrastructure. You can read more information about Traefik at their [repository](https://github.com/containous/traefik) or by going through their [documentation](https://traefik.io/).
 
 If you are like me, you might have many different projects running at the same time with various port bindings that often conflict, or are difficult to remember. This small setup was built to solve the challenges associated with managing dozens of different port bindings on local development with docker.
@@ -64,7 +71,7 @@ Docker-compose containers are hosted at `http://(projectName).(serviceName).test
 
 To add a container to the proxy network in a docker-compose file, you can add the following to your compose file:
 ``` yaml
-version: "3.3"
+version: "3.8"
 services:
   serviceName:
     networks:
@@ -78,7 +85,7 @@ networks:
 ### Enable TLS Support
 Within your docker compose file, add the following labels to enable TLS:
 ``` yaml
-version: "3.3"
+version: "3.8"
 services:
   serviceName:
     labels:
@@ -94,7 +101,7 @@ services:
 ### Custom Host Name
 Within your docker compose file, add the following labels to use a custom host name:
 ``` yaml
-version: "3.3"
+version: "3.8"
 services:
   serviceName:
     labels:
